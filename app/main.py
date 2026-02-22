@@ -138,11 +138,20 @@ async def analyze_url(req: AnalyzeRequest) -> dict[str, Any]:
 
     # 4. Combine scores
     if ml_prob is not None:
-        # Blend ML probability with rule score for final risk
         risk_score = round(ml_prob * 60 + rule_score * 0.4)
         confidence = ml_prob if ml_prob > 0.5 else (1 - ml_prob)
         verdict = "PHISHING" if ml_prob >= 0.5 else "LEGITIMATE"
         engine = _engine_name
+
+        # ── Rule-based override (safety net) ──────────────────────────
+        danger_flags = sum(
+            1 for f in breakdown_result["flags"] if f.get("severity") == "danger"
+        )
+        if danger_flags >= 3 and verdict == "LEGITIMATE":
+            verdict = "PHISHING"
+            confidence = max(confidence, 0.85)
+            risk_score = max(risk_score, 75)
+            engine = _engine_name + "+override"
     else:
         # Pure rule-based
         risk_score = rule_score
