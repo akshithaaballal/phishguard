@@ -693,14 +693,14 @@
   </div>
   <div class="footer-links">
     <a href="#">GitHub</a>
-    <a href="http://localhost:8000/docs" target="_blank">API Docs</a>
+    <a href="http://phishguardd.onrender.com/docs" target="_blank">API Docs</a>
     <a href="#">Report False Positive</a>
   </div>
 </footer>
 
 <script>
 // ─── Configuration ───────────────────────────────────────────────────
-const API_BASE = 'https://phishguardd.onrender.com';
+const API_BASE = 'https://phishguardd.onrender.com/api/v1';
 
 // ─── Example URLs ────────────────────────────────────────────────────
 function setExample(url) {
@@ -771,7 +771,7 @@ async function analyzeURL() {
     btn.disabled = false;
 
     if (err instanceof TypeError && err.message.includes('fetch')) {
-      showError('Cannot reach the backend. Make sure it is running:\n\nuvicorn app.main:app --reload\n\nThen open http://localhost:8000/docs to confirm.');
+      showError('Cannot reach the backend. Make sure it is running:\n\nuvicorn app.main:app --reload\n\nThen open http://phishguardd.onrender.com/docs to confirm.');
     } else {
       showError(`Unexpected error: ${err.message}`);
     }
