@@ -1,0 +1,32 @@
+{
+  "engine": "xgboost",
+  "feature_columns": [
+    "url_length",
+    "path_length",
+    "num_dots",
+    "num_hyphens",
+    "num_digits_in_domain",
+    "num_slashes",
+    "num_query_params",
+    "num_subdomains",
+    "domain_length",
+    "url_entropy",
+    "suspicious_keyword_count",
+    "domain_age_days",
+    "has_https",
+    "has_ip_address",
+    "has_at_symbol",
+    "has_double_slash",
+    "has_hex_encoding",
+    "tld_is_high_risk",
+    "brand_impersonation",
+    "dns_resolves",
+    "has_non_standard_port",
+    "subdomain_count"
+  ],
+  "n_train": 16000,
+  "n_test": 4000,
+  "auc_roc": 1.0,
+  "cv_auc_mean": 1.0,
+  "cv_auc_std": 4.965068306494546e-17
+}
