@@ -143,9 +143,9 @@ async def analyze_url(req: AnalyzeRequest) -> dict[str, Any]:
         verdict = "PHISHING" if ml_prob >= 0.5 else "LEGITIMATE"
         engine = _engine_name
 
-        # ── Rule-based override (safety net) ──────────────────────────
+       # ── Rule-based override (safety net) ──────────────────────────
         danger_flags = sum(
-            1 for f in breakdown_result["flags"] if f.get("severity") == "danger"
+            1 for f in breakdown_result["flags"] if f.get("severity") == "red"
         )
         if danger_flags >= 3 and verdict == "LEGITIMATE":
             verdict = "PHISHING"
