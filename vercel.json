@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "PHISHGAURD.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "PHISHGAURD.html" }
+  ]
+}
