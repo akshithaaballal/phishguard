@@ -55,7 +55,6 @@ We built **PhishGuard** — an end-to-end AI-powered phishing detection system t
 - Works on **brand new, never-seen domains** — not just known blacklisted URLs
 - **Explains its reasoning** — you see exactly which features triggered the alert
 - **Real-time** — full analysis in under 500ms
-- **Chrome Extension** — intercepts links as you browse and shows a popup alert automatically
 
 ---
 
@@ -121,7 +120,6 @@ Final risk score = `(ML probability × 60) + (rule score × 0.4)`
 | ML Model | XGBoost, scikit-learn |
 | Explainability | SHAP |
 | Domain Intel | python-whois, socket (DNS) |
-| Browser Extension | Chrome Manifest V3, JavaScript |
 | Frontend Hosting | Vercel |
 | Backend Hosting | Render |
 | Version Control | Git, GitHub |
@@ -149,7 +147,7 @@ PHISHING/
 │
 ├── screenshots/             ← Add your screenshots here
 │
-└── phishguard-extension/    ← Chrome Extension
+└── phishguard-
     ├── manifest.json
     ├── background.js        ← Service worker + API calls
     ├── content.js           ← Link interceptor + popup alerts
@@ -166,7 +164,6 @@ PHISHING/
 - Python 3.10 or above
 - pip
 - Git
-- Google Chrome (for the extension)
 
 ### 1. Clone the repository
 
@@ -204,14 +201,6 @@ INFO:     Application startup complete.
 ### 5. Open the frontend
 
 Open `PHISHGAURD.html` directly in your browser. It connects to `http://localhost:8000` automatically.
-
-### 6. Install the Chrome Extension (optional)
-
-1. Open Chrome → go to `chrome://extensions`
-2. Enable **Developer Mode** (top right toggle)
-3. Click **Load unpacked**
-4. Select the `phishguard-extension/` folder
-5. The PhishGuard shield icon will appear in your toolbar
 
 ---
 
