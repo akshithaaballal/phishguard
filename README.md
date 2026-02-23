@@ -15,7 +15,7 @@
 
 ---
 
-## 📌 About the Hackathon
+##  About the Hackathon
 
 This project was built as part of the **48-Hour Online Hackathon** conducted by Sai Vidya Institute of Technology — a competitive innovation challenge where teams ideate, design, develop, and present a working MVP within 48 continuous hours.
 
@@ -29,7 +29,7 @@ This project was built as part of the **48-Hour Online Hackathon** conducted by 
 
 ---
 
-## 🎯 Problem Statement
+##  Problem Statement
 
 Phishing is one of the most common and damaging cyberattacks today. Every day, thousands of people fall victim to fake websites and malicious URLs that look completely legitimate. Existing tools rely on static blacklists — which means a brand new phishing domain registered this morning won't be caught until it's manually reported and added to the list. That's too slow.
 
@@ -37,7 +37,7 @@ We wanted to build something smarter — a system that can detect phishing patte
 
 ---
 
-## 💡 Solution Approach
+##  Solution Approach
 
 We built **PhishGuard** — an end-to-end AI-powered phishing detection system that analyzes any URL in real time and tells you whether it's safe or a phishing attempt, along with a full explanation of why.
 
@@ -59,7 +59,7 @@ We built **PhishGuard** — an end-to-end AI-powered phishing detection system t
 
 ---
 
-## 🖥️ Screenshots
+##  Screenshots
 
 > **Homepage — URL Analyzer**
 
@@ -73,12 +73,7 @@ We built **PhishGuard** — an end-to-end AI-powered phishing detection system t
 
 ![Safe Result](screenshots/safe-result.png)
 
-> **Chrome Extension — Real-Time Popup Alert**
-
-![Chrome Extension](screenshots/extension-popup.png)
-
-*To add your own screenshots: create a `screenshots/` folder in the repo root and drop in your images with the filenames above.*
-
+>
 ---
 
 ## 🧠 ML Model Details
@@ -117,7 +112,7 @@ Final risk score = `(ML probability × 60) + (rule score × 0.4)`
 
 ---
 
-## 🏗️ Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -133,7 +128,7 @@ Final risk score = `(ML probability × 60) + (rule score × 0.4)`
 
 ---
 
-## 🗂️ Project Structure
+##  Project Structure
 
 ```
 PHISHING/
@@ -164,7 +159,7 @@ PHISHING/
 
 ---
 
-## ⚙️ Setup Instructions
+##  Setup Instructions
 
 ### Prerequisites
 
@@ -220,7 +215,7 @@ Open `PHISHGAURD.html` directly in your browser. It connects to `http://localhos
 
 ---
 
-## 🚀 Deployment
+##  Deployment
 
 | Service | URL |
 |---------|-----|
@@ -233,7 +228,7 @@ Open `PHISHGAURD.html` directly in your browser. It connects to `http://localhos
 
 ---
 
-## 📡 API Reference
+##  API Reference
 
 ### `POST /api/v1/analyze`
 
@@ -278,7 +273,7 @@ Returns backend status and whether the ML model is loaded.
 
 ---
 
-## 🔍 Known Limitations
+##  Known Limitations
 
 We built this in 48 hours so here's what we know could be better:
 
@@ -289,7 +284,7 @@ We built this in 48 hours so here's what we know could be better:
 
 ---
 
-## 🔮 Future Scope
+##  Future Scope
 
 - Integrate Google Safe Browsing API and VirusTotal for cross-referencing
 - Add email body scanning (Gmail plugin)
@@ -301,16 +296,18 @@ We built this in 48 hours so here's what we know could be better:
 
 ## 👥 Team
 
-Built with ☕ and very little sleep during the 48-hour hackathon window.
+Built with very little sleep during the 48-hour hackathon window.
 
 | Name | Role |
 |------|------|
-| Akshithaa Ballal | Full Stack + ML + Deployment |
-| *(add teammates)* | *(add roles)* |
+|  Akshithaa Ballal  | 1VA23IS006 |
+| Akarsh Sujay Kumar | 1VA23IS004 |
+|       Ananya R     | 1VA23IS009 |
+|     Devraj M P     | 1VA23IS022 |
 
 **Institution:** Sai Vidya Institute of Technology
 **Department:** Information Science & Engineering
-**Semester:** 6th Semester, 2024–25
+**Semester:** 6th Semester
 
 ---
 
