@@ -20,7 +20,7 @@
 This project was built as part of the **48-Hour Online Hackathon** conducted by Sai Vidya Institute of Technology — a competitive innovation challenge where teams ideate, design, develop, and present a working MVP within 48 continuous hours.
 
 - **Mode:** Online
-- **Duration:** 48 Hours (Continuous)
+- **Duration:** 48 Hours (online)
 - **Eligibility:** 6th Semester ISE students, Sai Vidya Institute of Technology
 - **Team Size:** 2–4 members
 
@@ -86,16 +86,6 @@ We built **PhishGuard** — an end-to-end AI-powered phishing detection system t
 | Explainability | SHAP values per prediction |
 | Calibrated against | Mohammad et al. (2016), Sahingoz et al. (2019), APWG eCrime Reports |
 
-### The 22 Features We Extract
-
-| Category | Features |
-|----------|----------|
-| URL Structure | url_length, path_length, num_dots, num_hyphens, num_slashes, num_query_params, url_entropy |
-| Domain | domain_length, num_subdomains, num_digits_in_domain, tld_is_high_risk, domain_age_days |
-| Security | has_https, has_ip_address, has_at_symbol, has_double_slash, has_hex_encoding, has_non_standard_port |
-| Content | suspicious_keyword_count, brand_impersonation |
-| Network | dns_resolves |
-
 ### Risk Score Breakdown
 
 Every URL gets scored across 4 categories:
@@ -115,7 +105,7 @@ Final risk score = `(ML probability × 60) + (rule score × 0.4)`
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | HTML, CSS, Vanilla JavaScript |
+| Frontend | HTML, CSS, JavaScript |
 | Backend | Python, FastAPI |
 | ML Model | XGBoost, scikit-learn |
 | Explainability | SHAP |
@@ -147,7 +137,7 @@ PHISHING/
 │
 ├── screenshots/             ← Add your screenshots here
 │
-└── phishguard-
+└── phishguard
     ├── manifest.json
     ├── background.js        ← Service worker + API calls
     ├── content.js           ← Link interceptor + popup alerts
