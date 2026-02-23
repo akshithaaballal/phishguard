@@ -28,5 +28,5 @@
   "n_test": 4000,
   "auc_roc": 1.0,
   "cv_auc_mean": 1.0,
-  "cv_auc_std": 4.965068306494546e-17
+  "cv_auc_std": 0.0
 }
