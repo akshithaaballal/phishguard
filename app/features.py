@@ -1,7 +1,6 @@
 """
-PhishGuard — URL Feature Extractor
-Extracts 30+ heuristic features from a URL for the ML model.
-Uses only Python stdlib — no external packages required for this module.
+PhishGuard - URL Feature Extractor
+Uses only Python stdlib.
 """
 
 import re
@@ -9,9 +8,7 @@ import math
 import socket
 import urllib.parse
 from datetime import datetime, timezone
-from typing import Any
 
-# ─── Known high-abuse TLDs (from ICANN / Spamhaus abuse reports) ─────────────
 HIGH_RISK_TLDS = {
     "tk", "ml", "ga", "cf", "gq",
     "xyz", "top", "icu", "buzz", "click",
@@ -22,7 +19,6 @@ HIGH_RISK_TLDS = {
     "site", "website", "live", "shop",
 }
 
-# ─── Suspicious keywords ──────────────────────────────────────────────────────
 SUSPICIOUS_KEYWORDS = [
     "login", "signin", "verify", "secure", "account", "update",
     "confirm", "bank", "paypal", "apple", "amazon", "google",
@@ -31,7 +27,6 @@ SUSPICIOUS_KEYWORDS = [
     "webscr", "validate", "auth", "recover",
 ]
 
-# ─── Brand-to-official-domain mapping ────────────────────────────────────────
 BRAND_DOMAINS = {
     "paypal": "paypal", "apple": "apple", "google": "google",
     "microsoft": "microsoft", "amazon": "amazon", "ebay": "ebay",
@@ -40,11 +35,19 @@ BRAND_DOMAINS = {
     "bankofamerica": "bankofamerica",
 }
 
+# Leet-speak normalization: g00gle -> google, paypa1 -> paypal
+LEET_MAP = str.maketrans({
+    "0": "o", "1": "l", "3": "e", "4": "a",
+    "5": "s", "6": "g", "7": "t", "8": "b",
+})
+
+def _normalize_leet(s: str) -> str:
+    return s.translate(LEET_MAP)
+
 MULTI_TLDS = {"co.uk", "co.nz", "co.jp", "com.au", "com.br", "org.uk", "net.au"}
 
 
 def _parse_domain_parts(hostname: str):
-    """Split hostname into (subdomain, domain, tld) without external libs."""
     parts = hostname.lower().split(".")
     if len(parts) == 1:
         return "", hostname, ""
@@ -70,10 +73,6 @@ def shannon_entropy(s: str) -> float:
 
 
 def extract_features(url: str) -> tuple:
-    """
-    Extract feature vector from a URL.
-    Returns (features_dict, metadata_dict).
-    """
     url = url.strip()
     if not url.startswith(("http://", "https://")):
         url = "http://" + url
@@ -86,6 +85,10 @@ def extract_features(url: str) -> tuple:
 
     subdomain, domain, tld = _parse_domain_parts(hostname)
     url_lower = url.lower()
+
+    # Leet-normalized versions for typosquatting detection
+    domain_normalized = _normalize_leet(domain)
+    url_normalized = _normalize_leet(url_lower)
 
     has_https = scheme == "https"
     url_length = len(url)
@@ -107,11 +110,25 @@ def extract_features(url: str) -> tuple:
     tld_is_high_risk = tld in HIGH_RISK_TLDS
 
     matched_keywords = [kw for kw in SUSPICIOUS_KEYWORDS if kw in url_lower]
+    # Also check normalized URL for leet-speak keywords
+    for kw in SUSPICIOUS_KEYWORDS:
+        if kw in url_normalized and kw not in matched_keywords:
+            matched_keywords.append(kw)
     suspicious_keyword_count = len(matched_keywords)
 
+    # Brand impersonation — check both real and leet-normalized domain
     brand_impersonation = False
     for brand, brand_domain in BRAND_DOMAINS.items():
+        # Check 1: brand word appears in URL but domain is not the brand
         if brand in url_lower and domain != brand_domain:
+            brand_impersonation = True
+            break
+        # Check 2: domain is a leet-speak version of the brand (g00gle, paypa1)
+        if domain_normalized == brand_domain and domain != brand_domain:
+            brand_impersonation = True
+            break
+        # Check 3: brand appears in normalized URL
+        if brand in url_normalized and domain != brand_domain and domain_normalized != brand_domain:
             brand_impersonation = True
             break
 
